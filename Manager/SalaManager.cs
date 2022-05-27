@@ -44,28 +44,26 @@ namespace ProgettoCinema.Manager
 
             string update = @"UPDATE Sale SET PostiOccupati = 0 WHERE IdSala = @IdSala; ";
             
-            
-            
             using var connection = new SqlConnection(ConnectionString);
             connection.Open();
             using var command = new SqlCommand(update, connection);
             command.Parameters.AddWithValue("@IdSala", id);
             command.ExecuteNonQuery();
 
-            string delete1 = @"DELETE FROM Biglietti OUTPUT DELETED.IdBiglietto WHERE IdSala = @IdSala;";
-            using var command2 = new SqlCommand(delete1, connection);
+            string select1 = @"SELECT IdBiglietto FROM Biglietti WHERE IdSala = @IdSala;";
+            using var command2 = new SqlCommand(select1, connection);
             command2.Parameters.AddWithValue("@IdSala", id);
             int idBiglietto = Convert.ToInt32(command2.ExecuteScalar());
 
-
-            string delete2 = @"DELETE FROM Spettatori WHERE Spettatori.IdBiglietto = @IdBiglietto ";
-            using var command3 = new SqlCommand(delete2, connection);
+            string delete1 = @"DELETE FROM Spettatori WHERE Spettatori.IdBiglietto = @IdBiglietto ";
+            using var command3 = new SqlCommand(delete1, connection);
             command3.Parameters.AddWithValue("@IdBiglietto", idBiglietto);
             command3.ExecuteNonQuery();
 
-
-
-
+            string delete2 = @"DELETE FROM Biglietti WHERE IdSala = @IdSala;";
+            using var command4 = new SqlCommand(delete2, connection);
+            command4.Parameters.AddWithValue("@IdSala", id);
+            command4.ExecuteNonQuery();
 
         }
 

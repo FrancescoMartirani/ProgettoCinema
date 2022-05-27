@@ -62,10 +62,11 @@ namespace ProgettoCinema.Controllers
         }
 
         [HttpGet]
-        public IActionResult SvuotaSala(int id)
+        public IActionResult SvuotaSala(SalaCinematografica sala)
         {
+
             var saleManager = new SaleManager();
-            saleManager.svuotaSala(id);
+            saleManager.svuotaSala(sala.idSala);
             return RedirectToAction("Index");
         }
         public IActionResult Privacy()
