@@ -6,7 +6,7 @@
         public int idSala { get; set; }
         public string nomeSala { get; set; }
 
-        public int massimoSpettatori = 100;
+        public int postiMassimi { get; set; }
 
         public int postiOccupati{ get; set; }
         public Film film { get; set; }

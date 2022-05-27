@@ -9,6 +9,7 @@
 <table class="table">
     <tr>
         <th>Nome Sala</th>
+        <th>Posti Disponibili</th>
         <th>Posti Occupati</th>
     </tr>
     @if (Model != null && Model.Any())
@@ -17,6 +18,7 @@
         {
             <tr>
                 <td>@sala.nomeSala</td>
+                <td>@(sala.postiMassimi - sala.postiOccupati)</td>
                 <td>@sala.postiOccupati</td>
                 <td>
                     @Html.ActionLink("Visualizza film","VisualizzaFilmSala",new {idSala = sala.idSala}) |

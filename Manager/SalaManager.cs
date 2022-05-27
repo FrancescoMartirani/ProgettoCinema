@@ -27,6 +27,7 @@ namespace ProgettoCinema.Manager
                     idSala = Convert.ToInt32(reader["IdSala"].ToString()),
                     nomeSala = reader["NomeSala"].ToString(),
                     postiOccupati = Convert.ToInt32(reader["PostiOccupati"].ToString()),
+                    postiMassimi = Convert.ToInt32(reader["MaxPosti"].ToString())
 
                 };
 

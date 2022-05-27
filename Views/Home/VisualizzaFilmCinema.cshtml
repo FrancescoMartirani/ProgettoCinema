@@ -8,12 +8,13 @@
 
 <table class="table">
     <tr>
+
         <th>Titolo</th>
         <th>Autore</th>
         <th>Produttore</th>
         <th>Genere</th>
         <th>Durata</th>
-        <th>NomeSala</th>
+        <th>Nome Sala</th>
     </tr>
     @if (Model != null && Model.Any())
     {
@@ -26,9 +27,6 @@
                 <td>@film.genere</td>
                 <td>@film.durata</td>
                 <td>@film.nomeSala</td>
-                <td>
-                    
-                </td>
             </tr>
         }
     }
