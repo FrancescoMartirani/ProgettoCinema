@@ -39,17 +39,69 @@ namespace ProgettoCinema.Manager
 
         }
 
-        public bool svuotaSala(SalaCinematografica sala)
-        {   
+        public void svuotaSala(int id)
+        {
 
-            string sql = @"UPDATE Sale SET PostiOccupati = 0 WHERE IdSala = @IdSala";
+            string update = @"UPDATE Sale SET PostiOccupati = 0 WHERE IdSala = @IdSala; ";
+            
+            
+            
+            using var connection = new SqlConnection(ConnectionString);
+            connection.Open();
+            using var command = new SqlCommand(update, connection);
+            command.Parameters.AddWithValue("@IdSala", id);
+            command.ExecuteNonQuery();
+
+            string delete1 = @"DELETE FROM Biglietti OUTPUT DELETED.IdBiglietto WHERE IdSala = @IdSala;";
+            using var command2 = new SqlCommand(delete1, connection);
+            command2.Parameters.AddWithValue("@IdSala", id);
+            int idBiglietto = Convert.ToInt32(command2.ExecuteScalar());
+
+
+            string delete2 = @"DELETE FROM Spettatori WHERE Spettatori.IdBiglietto = @IdBiglietto ";
+            using var command3 = new SqlCommand(delete2, connection);
+            command3.Parameters.AddWithValue("@IdBiglietto", idBiglietto);
+            command3.ExecuteNonQuery();
+
+
+
+
+
+        }
+
+        public int getIdSalaByIdFilm (int idFilm)
+        {
+
+            string sql = @"SELECT Sale.IdSala FROM Sale JOIN Film ON Film.IdFilm = Sale.IdFilm WHERE Film.IdFilm = @IdFilm";
             using var connection = new SqlConnection(ConnectionString);
             connection.Open();
             using var command = new SqlCommand(sql, connection);
-            command.Parameters.AddWithValue("@IdSala", sala.idSala);
+            command.Parameters.AddWithValue("@IdFilm", idFilm);
 
-            return command.ExecuteNonQuery() > 1;
+            return Convert.ToInt32(command.ExecuteScalar());
 
+        }
+
+        public bool updatePosti(int idFilm)
+        {
+
+            var idSala = getIdSalaByIdFilm(idFilm);
+
+            string sql = @"SELECT PostiOccupati FROM Sale WHERE Sale.IdSala=@IdSala";
+            using var connection = new SqlConnection(ConnectionString);
+            connection.Open();
+            using var command = new SqlCommand(sql, connection);
+            command.Parameters.AddWithValue("@IdSala", idSala);
+
+            var postiOccupati = Convert.ToInt32(command.ExecuteScalar());
+            postiOccupati++;
+
+            string sql2 = @"UPDATE Sale SET PostiOccupati=@PostiOccupati WHERE IdSala=@IdSala";
+            using var command2 = new SqlCommand(sql2, connection);
+            command2.Parameters.AddWithValue("@IdSala", idSala);
+            command2.Parameters.AddWithValue("@PostiOccupati", postiOccupati);
+
+            return command2.ExecuteNonQuery()>1;
         }
 
     }

@@ -1,0 +1,65 @@
+﻿@model Spettatore;
+
+@{
+
+    ViewBag.Title = "Acquista Biglietti";
+
+}
+@if (ViewBag.Message != null)
+{
+
+    <div roll="alert" class="alert alert-success">
+
+        @ViewBag.Message
+
+    </div>
+}
+@using (Html.BeginForm()){
+
+    <div class="form-horizontal">
+
+        <div>Inserisci i tuoi dati</div>
+        <hr>
+        <div class ="form-group">
+            @Html.LabelFor(model => model.nome, htmlAttributes: new{@class ="label col-md-2"})
+            <div class="col-md-10">
+
+                @Html.EditorFor(model => model.nome)
+            </div>
+        </div>
+        <div class ="form-group">
+            @Html.LabelFor(model => model.cognome, htmlAttributes: new{@class ="label col-md-2"})
+            <div class="col-md-10">
+
+                @Html.EditorFor(model => model.cognome)
+            </div>
+        </div>
+        <div class ="form-group">
+            @Html.LabelFor(model => model.datanascita, htmlAttributes: new{@class ="label col-md-2"})
+            <div class="col-md-10">
+
+                @Html.EditorFor(model => model.datanascita)
+            </div>
+        </div>
+         <div class ="form-group">
+            @Html.LabelFor(model => model.biglietto.numeroPosto, htmlAttributes: new{@class ="label col-md-2"})
+            <div class="col-md-10">
+
+                @Html.EditorFor(model => model.biglietto.numeroPosto)
+            </div>
+        </div>
+        <div class ="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Procedi" class="btn btn-btndefault"/>
+            </div>
+        </div>
+
+    </div>
+
+}
+
+<div>
+
+    @Html.ActionLink("BackToHome","Index")
+
+</div>

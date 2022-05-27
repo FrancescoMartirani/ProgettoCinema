@@ -23,7 +23,7 @@
                 <td>
                     @Html.ActionLink("Visualizza film","VisualizzaFilmSala",new {idSala = sala.idSala}) |
                      @if (sala.postiOccupati>0){
-                        @Html.ActionLink("Svuota sala", "SvuotaSala", new { idSala = sala.idSala });
+                        @Html.ActionLink("Svuota sala", "SvuotaSala", sala.idSala );
 
                      }
                 </td>

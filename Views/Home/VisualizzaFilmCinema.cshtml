@@ -27,6 +27,9 @@
                 <td>@film.genere</td>
                 <td>@film.durata</td>
                 <td>@film.nomeSala</td>
+                <td>
+                    @Html.ActionLink("Acquista biglietti","AcquistaBiglietti",new {idFilm = film.idFilm})
+                </td>
             </tr>
         }
     }

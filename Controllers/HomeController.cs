@@ -43,6 +43,31 @@ namespace ProgettoCinema.Controllers
             return View(filmManager.getSalaFilm(idSala));
 
         }
+
+        [HttpGet]
+        public IActionResult AcquistaBiglietti(int id)
+        {
+            var spettatore = new Spettatore();
+            spettatore.setidFilm(id);
+            return View(spettatore);
+        }
+
+        [HttpPost]
+        public IActionResult AcquistaBiglietti(Spettatore spettatore)
+        {
+            
+            var bigliettiManager = new BigliettiManager();
+            bigliettiManager.aggiungiBiglietto(spettatore);
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult SvuotaSala(int id)
+        {
+            var saleManager = new SaleManager();
+            saleManager.svuotaSala(id);
+            return RedirectToAction("Index");
+        }
         public IActionResult Privacy()
         {
             return View();
