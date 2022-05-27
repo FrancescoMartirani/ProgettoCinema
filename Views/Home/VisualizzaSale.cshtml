@@ -1,0 +1,38 @@
+﻿@model IEnumerable<SalaCinematografica>
+
+@{
+    ViewBag.Title = "Sale";
+}
+
+<h1 class="display-4">Seleziona la sala in cui prenotare il posto</h1>
+
+<table class="table">
+    <tr>
+        <th>Nome Sala</th>
+        <th>Posti Occupati</th>
+    </tr>
+    @if (Model != null && Model.Any())
+    {
+        foreach (var sala in Model)
+        {
+            <tr>
+                <td>@sala.nomeSala</td>
+                <td>@sala.postiOccupati</td>
+                <td>
+                    @Html.ActionLink("Visualizza film","VisualizzaFilmSala",new {idSala = sala.idSala}) |
+                     @if (sala.postiOccupati>0){
+                        @Html.ActionLink("Svuota sala", "SvuotaSala", new { idSala = sala.idSala });
+
+                     }
+                </td>
+            </tr>
+        }
+    }
+    else
+    {
+        <tr>
+            <td colspan="5" class="text-center"> Nessuna sala esistente</td>
+        </tr>
+    }
+</table>
+
