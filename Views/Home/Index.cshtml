@@ -1,0 +1,35 @@
+﻿@model IEnumerable<Cinema>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h1 class="display-4">Seleziona il cinema in cui prenotare il posto</h1>
+
+<table class="table">
+    <tr>
+        <th>Nome Cinema</th>
+        <th>Indirizzo</th>
+    </tr>
+    @if (Model != null && Model.Any())
+    {
+        foreach (var cinema in Model)
+        {
+            <tr>
+                <td>@cinema.nomeCinema</td>
+                <td>@cinema.indirizzo</td>
+                <td>
+                    @Html.ActionLink("Visualizza film","VisualizzaFilmCinema",new {idCinema = cinema.idCinema}) |
+                    @Html.ActionLink("Visualizza sale","VisualizzaSale",new {idCinema = cinema.idCinema})
+                </td>
+            </tr>
+        }
+    }
+    else
+    {
+        <tr>
+            <td colspan="5" class="text-center"> Nessun cinema esistente</td>
+        </tr>
+    }
+</table>
+

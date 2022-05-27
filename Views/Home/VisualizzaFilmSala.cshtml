@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Film>
+
+@{
+    ViewBag.Title = "Film";
+}
+
+<h1 class="display-4">Seleziona il film da guardare</h1>
+
+<table class="table">
+    <tr>
+        <th>Titolo</th>
+        <th>Autore</th>
+        <th>Produttore</th>
+        <th>Genere</th>
+        <th>Durata</th>
+    </tr>
+    @if (Model != null && Model.Any())
+    {
+        foreach (var film in Model)
+        {
+            <tr>
+                <td>@film.titolo</td>
+                <td>@film.autore</td>
+                <td>@film.produttore</td>
+                <td>@film.genere</td>
+                <td>@film.durata</td>
+                <td>
+                    @Html.ActionLink("Acquista biglietti","AcquistaBiglietti",new {idFilm = film.idFilm})
+                </td>
+            </tr>
+        }
+    }
+    else
+    {
+        <tr>
+            <td colspan="5" class="text-center"> Nessuna sala esistente</td>
+        </tr>
+    }
+</table>
+
