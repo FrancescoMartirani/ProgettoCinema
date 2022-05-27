@@ -7,12 +7,13 @@
         public int numeroPosto { get; set; }
 
         public int idSala { get; set; }
+
         public double prezzo = 12.50;
 
         public bool maggiorenne(int età)
         {
 
-            if (età > 18)
+            if (età >= 18)
                 return true;
             else
                 return false;
