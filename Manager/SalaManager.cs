@@ -102,5 +102,11 @@ namespace ProgettoCinema.Manager
             return command2.ExecuteNonQuery()>1;
         }
 
+        public bool controllaPosto(int numeroPosto)
+        {
+
+            return true;
+        }
+
     }
 }
